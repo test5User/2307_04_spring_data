@@ -16,5 +16,15 @@ public class Main {
         dataSource.setPassword("");
 
         var jdbcTemplate = new JdbcTemplate(dataSource);
+
+        var users = jdbcTemplate.query("SELECT * FROM user1", new UserRowMapping());
+        //users.forEach(System.out::println);
+
+        var users1 = jdbcTemplate.query("SELECT * FROM user1 WHERE id > ?", new UserRowMapping(), new Object[]{2});
+        //users1.forEach(System.out::println);
+
+        jdbcTemplate.update("UPDATE user1 SET age = ? WHERE id = ?", 27, 4);
+        var users2 = jdbcTemplate.query("SELECT * FROM user1", new UserRowMapping());
+        users2.forEach(System.out::println);
     }
 }
