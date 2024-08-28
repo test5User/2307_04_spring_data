@@ -1,10 +1,10 @@
 package by.itclass._02_spring_jpa.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -19,4 +19,12 @@ public class Airplane {
     private String model;
     @NonNull
     private int place;
+    @OneToMany
+    @JoinColumn(name = "airplane_id")
+    List<Passenger> passengers;
+
+    @Autowired
+    public void setPassengers(List<Passenger> passengers) {
+        this.passengers = passengers;
+    }
 }

@@ -20,4 +20,7 @@ public interface AirplaneRepository extends CrudRepository<Airplane, Integer> {
 
     @Query(value = "SELECT * FROM airplane", nativeQuery = true)
     List<Airplane> getAllPlanes();
+
+    @Query(value = "from Airplane WHERE model = ?1 AND place = ?2")
+    Airplane concretePlain(String model, int place);
 }
